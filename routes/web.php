@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\DepartmentController;
+use App\Http\Controllers\WEB\DoctorController;
 
 
 /*
@@ -15,8 +16,10 @@ use App\Http\Controllers\WEB\DepartmentController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.department');
-});
+// Route::get('/', function () {
+//     return view('admin.departments');
+// });
 
 Route::resource('departments', DepartmentController::class);
+
+Route::resource('doctors', DoctorController::class);

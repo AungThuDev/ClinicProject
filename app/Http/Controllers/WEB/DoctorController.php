@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\WEB;
 
+use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -13,7 +16,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
+        $doctors = Doctor::all();
+        return view('admin.doctors.index',compact('doctors'));
     }
 
     /**
@@ -23,7 +27,9 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::all();
+        //dd($departments);
+        return view('admin.doctors.create',compact('departments'));
     }
 
     /**
@@ -34,7 +40,14 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $doctor = new Doctor();
+        $doctor->name = $request->name;
+        $doctor->address = $request->address;
+        $doctor->phone_no = $request->phone_no;
+        $doctor->department_id = $request->department;
+        $doctor->save();
+
+        return redirect()->route('doctors.index');
     }
 
     /**
@@ -54,9 +67,10 @@ class DoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Doctor $doctor)
     {
-        //
+        $departments = Department::all();
+        return view('admin.doctors.edit',compact('doctor','departments'));        
     }
 
     /**
@@ -68,7 +82,15 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $doctor = Doctor::find($id);
+        $doctor->name = $request->name;
+        $doctor->address = $request->address;
+        $doctor->phone_no = $request->phone_no;
+        $doctor->department_id = $request->department;
+        $doctor->save();
+
+        return redirect()->route('doctors.index');
+
     }
 
     /**
@@ -79,6 +101,9 @@ class DoctorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $doctor = Doctor::find($id);
+        $doctor->delete();
+
+        return redirect()->route('doctors.index');
     }
 }
