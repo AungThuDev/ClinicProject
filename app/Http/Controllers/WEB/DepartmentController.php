@@ -33,11 +33,17 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = validator($request->all(),[
+            "name" => "required",
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
         $department = new Department();
         $department->name = $request->name;
         $department->save();
 
-        return redirect()->route('departments.index');
+        return redirect()->route('departments.index')->with('info','Department created successfully');
     }
 
     /**
@@ -71,11 +77,17 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = validator($request->all(),[
+            "name" => "required",
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
         $department = Department::find($id);
         $department->name = $request->name;
         $department->save();
 
-        return redirect()->route('departments.index');   
+        return redirect()->route('departments.index')->with('info','updated successfully');   
     }
 
     /**
@@ -90,6 +102,6 @@ class DepartmentController extends Controller
 
         $department->delete();
 
-        return redirect()->route('departments.index');
+        return redirect()->route('departments.index')->with('info','deleted successfully');
     }
 }

@@ -40,6 +40,15 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = validator($request->all(),[
+            "name" => "required",
+            "address" => "required",
+            "phone_no" => "required",
+            "department" => "required",
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
         $doctor = new Doctor();
         $doctor->name = $request->name;
         $doctor->address = $request->address;
@@ -47,7 +56,7 @@ class DoctorController extends Controller
         $doctor->department_id = $request->department;
         $doctor->save();
 
-        return redirect()->route('doctors.index');
+        return redirect()->route('doctors.index')->with('info','Doctor created successfully');
     }
 
     /**
@@ -82,6 +91,15 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = validator($request->all(),[
+            "name" => "required",
+            "address" => "required",
+            "phone_no" => "required",
+            "department" => "required",
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
         $doctor = Doctor::find($id);
         $doctor->name = $request->name;
         $doctor->address = $request->address;
@@ -89,7 +107,7 @@ class DoctorController extends Controller
         $doctor->department_id = $request->department;
         $doctor->save();
 
-        return redirect()->route('doctors.index');
+        return redirect()->route('doctors.index')->with('info','updated successfully');
 
     }
 
@@ -104,6 +122,6 @@ class DoctorController extends Controller
         $doctor = Doctor::find($id);
         $doctor->delete();
 
-        return redirect()->route('doctors.index');
+        return redirect()->route('doctors.index')->with('info','deleted successfully');
     }
 }

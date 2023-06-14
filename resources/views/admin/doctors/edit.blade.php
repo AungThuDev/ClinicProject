@@ -27,6 +27,13 @@
                     <h3 class="card-title">Please Fill the Doctors Description detail</h3>
                 </div>
                 <div class="card-body">
+                  @if($errors->any())
+                  <div class="alert alert-warning">
+                    @foreach($errors->all() as $error)
+                    {{$error}}
+                    @endforeach
+                  </div>
+                  @endif
                     <form action="{{ route('doctors.update',$doctor->id) }}" method="post">
                         @CSRF
                         @method('PUT')

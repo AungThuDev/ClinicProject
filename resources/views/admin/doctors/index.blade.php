@@ -27,6 +27,11 @@
                     <h3 class="card-title">DataTable with default features</h3>
                 </div>
                 <div class="card-body">
+                  @if(session('info'))
+                  <div class="alert alert-success">
+                    {{session('info')}}
+                  </div>
+                  @endif
                     <table id="clinic" class="table table-bordered table-striped">
                         <thead>
                             <tr>
