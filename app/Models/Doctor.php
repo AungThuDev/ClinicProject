@@ -19,7 +19,7 @@ class Doctor extends Model
 
     public function department() : BelongsTo
     {
-        return $this->belongsTo(Doctor::class);
+        return $this->belongsTo(Department::class);
     }
     public function schedules() : HasMany
     {

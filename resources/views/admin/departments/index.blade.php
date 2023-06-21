@@ -24,7 +24,7 @@
           <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">DataTable with default features</h3>
+                    <h3 class="card-title">DataTable with Departments' Description</h3>
                 </div>
                 <div class="card-body">
                     @if(session('info'))
@@ -46,12 +46,16 @@
                               <td>{{$dep->id}}</td>
                               <td>{{$dep->name}}</td>
                               <td>
-                                <a href="{{ route('departments.edit', $dep->id) }}" class="btn btn-warning">Edit</a>
+                              <div class="row">
+                                <a href="{{ route('departments.edit', $dep->id) }}" style="margin-right:10px ;" class="btn btn-warning">Edit</a>
                                 <form action="{{route('departments.destroy', $dep->id)}}" method="POST">
                                   @csrf
                                   @method('DELETE')
                                   <button type="submit" onclick="return confirm('Are you sure you want to delete this names?');" class="btn btn-danger">Delete</button>
                                 </form>
+                              </div>  
+                              
+                              
                               </td>
                             </tr>
                           @endforeach

@@ -20,6 +20,9 @@ use App\Http\Controllers\WEB\DoctorController;
 //     return view('admin.departments');
 // });
 
-Route::resource('departments', DepartmentController::class);
+Route::resource('/departments', DepartmentController::class)->middleware('auth');
 
-Route::resource('doctors', DoctorController::class);
+Route::resource('/doctors', DoctorController::class)->middleware('auth');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

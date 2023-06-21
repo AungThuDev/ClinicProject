@@ -51,8 +51,12 @@
                           <input type="text" class="form-control" name="phone_no" placeholder="Enter Phone Number">
                         </div>
                         <div class="form-group">
+                          <label for="">Qualification</label>
+                          <input type="text" class="form-control" name="qualification" placeholder="Enter Doctor's Qualification">
+                        </div>
+                        <div class="form-group">
                             <label for="department">Department</label>
-                            <select name="department" id="department" class="form-control">
+                            <select name="department_id" id="department" class="form-control">
                                 <option value="">Select Category</option>
                                 @foreach($departments as $department)
                                 <option value="{{$department->id}}">{{$department->name}}</option>

@@ -156,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     $('#clinic').DataTable({
       "paging": true,
       "lengthChange": false,
-      "searching": false,
+      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false,

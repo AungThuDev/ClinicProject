@@ -17,7 +17,10 @@ class DoctorController extends Controller
     public function index()
     {
         $doctors = Doctor::all();
-        return view('admin.doctors.index',compact('doctors'));
+        $day = config('days');
+        //dd($day);
+        $departments = Department::all();
+        return view('admin.doctors.index',compact('doctors','departments'));
     }
 
     /**
@@ -40,11 +43,13 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $validator = validator($request->all(),[
             "name" => "required",
             "address" => "required",
             "phone_no" => "required",
-            "department" => "required",
+            "department_id" => "required",
+            "qualification" => "required",
         ]);
         if($validator->fails()){
             return back()->withErrors($validator);
@@ -53,7 +58,8 @@ class DoctorController extends Controller
         $doctor->name = $request->name;
         $doctor->address = $request->address;
         $doctor->phone_no = $request->phone_no;
-        $doctor->department_id = $request->department;
+        $doctor->department_id = $request->department_id;
+        $doctor->qualification = $request->qualification;
         $doctor->save();
 
         return redirect()->route('doctors.index')->with('info','Doctor created successfully');
@@ -67,7 +73,7 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -95,7 +101,8 @@ class DoctorController extends Controller
             "name" => "required",
             "address" => "required",
             "phone_no" => "required",
-            "department" => "required",
+            "department_id" => "required",
+            "qualification" => "required",
         ]);
         if($validator->fails()){
             return back()->withErrors($validator);
@@ -104,7 +111,8 @@ class DoctorController extends Controller
         $doctor->name = $request->name;
         $doctor->address = $request->address;
         $doctor->phone_no = $request->phone_no;
-        $doctor->department_id = $request->department;
+        $doctor->department_id = $request->department_id;
+        $doctor->qualification = $request->qualification;
         $doctor->save();
 
         return redirect()->route('doctors.index')->with('info','updated successfully');
