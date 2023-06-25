@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
-            'name' => Str::random(10),
+            'name' => 'Clinic Admin',
             'phone_no' => '959556671',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin123'),

@@ -23,7 +23,7 @@ class Doctor extends Model
     }
     public function schedules() : HasMany
     {
-        return $this->hasMany(Doctor::class);
+        return $this->hasMany(Schedule::class);
     }
     public function qualifications() : HasMany
     {

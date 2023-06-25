@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\DepartmentController;
 use App\Http\Controllers\WEB\DoctorController;
-
+use App\Http\Controllers\WEB\DoctorScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +21,11 @@ use App\Http\Controllers\WEB\DoctorController;
 // });
 
 Route::resource('/departments', DepartmentController::class)->middleware('auth');
-
+Route::get('/doctors/add_schedule/{doctor_id}', [DoctorScheduleController::class,'create'])->name('doctors.addSchedule');
+Route::post('/doctors/add_schedule',[DoctorScheduleController::class,'store'])->name('doctors.storeSchedule');
 Route::resource('/doctors', DoctorController::class)->middleware('auth');
-Auth::routes();
+Auth::routes([
+    'register'=>false
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

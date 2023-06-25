@@ -17,7 +17,7 @@ class DoctorController extends Controller
     public function index()
     {
         $doctors = Doctor::all();
-        $day = config('days');
+        //$day = config('days');
         //dd($day);
         $departments = Department::all();
         return view('admin.doctors.index',compact('doctors','departments'));
@@ -73,7 +73,8 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        
+        $doctor = Doctor::find($id);
+        return view('admin.doctors.detail',compact('doctor'));
     }
 
     /**

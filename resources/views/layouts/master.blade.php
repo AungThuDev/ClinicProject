@@ -36,6 +36,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </li>
     </ul>
 
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        
+        <form action="logout" method="POST">
+          @csrf
+          <button class="btn btn-default" type="submit">Logout</button>
+        </form>
+
+        <!-- <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div> -->
+      </li>
+    </ul>
+
 
   </nav>
   <!-- /.navbar -->
@@ -53,10 +81,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{auth()->user()->name}}</a>
         </div>
       </div>
 
@@ -87,13 +115,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a> -->
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/departments" class="nav-link active">
+                <a href="/departments" class="nav-link {{Request::segment(1) == 'departments' ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Department</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/doctors" class="nav-link">
+                <a href="/doctors" class="nav-link {{Request::segment(1) == 'doctors' ? 'active' : ''}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Doctor</p>
                 </a>

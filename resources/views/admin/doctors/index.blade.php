@@ -55,8 +55,9 @@
                     <td>{{$doctor->qualification}}</td>
                     <td>
                       <div class="row">
+                        <a href="{{route('doctors.addSchedule',$doctor->id)}}" class="btn btn-secondary" style="margin-right: 10px;">Add Schedule</a>
                         <a href="{{route('doctors.edit', $doctor->id)}}" style="margin-right: 10px;" class="btn btn-warning">Edit</a>
-                        <a href="#" class="btn btn-success" style="margin-right: 10px;">Detail</a>
+                        <a href="{{route('doctors.show',$doctor->id)}}" class="btn btn-success" style="margin-right: 10px;">Detail</a>
                         <form action="{{route('doctors.destroy', $doctor->id)}}" method="POST">
                           @csrf
                           @method('DELETE')

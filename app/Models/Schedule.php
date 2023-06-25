@@ -19,7 +19,7 @@ class Schedule extends Model
 
     public function doctor() : BelongsTo
     {
-        return $this->belongsTo(Schedule::class);
+        return $this->belongsTo(Doctor::class);
     }
 
 }
