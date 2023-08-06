@@ -51,7 +51,7 @@
                     <td>{{$doctor->name}}</td>
                     <td>{{$doctor->address}}</td>
                     <td>{{$doctor->phone_no}}</td>
-                    <td>{{$doctor->department->name}}</td>
+                    <td>{{$doctor->department->name ?? ''}}</td>
                     <td>{{$doctor->qualification}}</td>
                     <td>
                       <div class="row">

@@ -9,7 +9,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Clinic X Admin Page</h1>
-            <a href="{{ route('doctors.index') }}" class="btn btn-success">Back</a>
+            <a href="{{ route('doctors.show',$schedule->doctor_id) }}" class="btn btn-success">Back</a>
           </div><!-- /.col -->
           
         </div><!-- /.row -->
@@ -36,30 +36,32 @@
                     <h3 class="card-title">Doctor Schedule Table</h3>
                 </div>
                 <div class="card-body">
-                      <form action="{{route('doctors.storeSchedule')}}" method="POST">
+                      <form action="{{route('doctors.updateSchedule',$schedule->id)}}" method="POST">
                         @CSRF
                         <div class="form-group">
                             <label for="day">Days</label>
                             <select name="day" id="" class="form-control">
                                 @foreach($days as $day)
-                                <option value="{{$day}}">{{$day}}</option>
+                                @if($day == $schedule->day)
+                                <option value="{{$day}}" selected>{{$day}}</option>
+                                @endif
                                 @endforeach
+                                
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="">Start Time</label>
-                            <input type="time" name="start_time" class="form-control">
+                            <input type="text" value="{{$schedule->start_time}}" name="start_time" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">End Time</label>
-                            <input type="time" name="end_time" class="form-control">
+                            <input type="text" value="{{$schedule->end_time}}" name="end_time" class="form-control">
                         </div>
                         <div>
                             <label for="">Doctor_Name</label>
-                            <input type="hidden" value="{{$doctor->id}}" name="doctor_id">
-                            <input type="text" class="form-control"  value="{{$doctor->name}}">
+                            <input type="text" class="form-control"  value="{{$schedule->doctor->name}}">
                         </div>
-                        <button class="btn btn-success mt-2" type="submit">Add Schedule</button>
+                        <button class="btn btn-success mt-2" type="submit">Update Schedule</button>
                       </form>
                       
                 </div>

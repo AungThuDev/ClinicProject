@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WEB;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Doctor;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -74,7 +75,8 @@ class DoctorController extends Controller
     public function show($id)
     {
         $doctor = Doctor::find($id);
-        return view('admin.doctors.detail',compact('doctor'));
+        $schedules = Schedule::all();
+        return view('admin.doctors.detail',compact('doctor','schedules'));
     }
 
     /**

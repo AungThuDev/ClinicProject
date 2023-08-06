@@ -16,16 +16,19 @@ use App\Http\Controllers\WEB\DoctorScheduleController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('admin.departments');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 Route::resource('/departments', DepartmentController::class)->middleware('auth');
 Route::get('/doctors/add_schedule/{doctor_id}', [DoctorScheduleController::class,'create'])->name('doctors.addSchedule');
 Route::post('/doctors/add_schedule',[DoctorScheduleController::class,'store'])->name('doctors.storeSchedule');
+Route::get('/doctors/edit_schedule/{schedule_id}',[DoctorScheduleController::class,'edit'])->name('doctors.editSchedule');
+Route::post('/doctors/update_schedule/{schedule_id}',[DoctorScheduleController::class,'update'])->name('doctors.updateSchedule');
+Route::delete('/doctors/delete_schedule/{schedule_id}', [ DoctorScheduleController::class,'delete' ])->name('doctors.deleteSchedule');
 Route::resource('/doctors', DoctorController::class)->middleware('auth');
 Auth::routes([
-    'register'=>false
+    'register'=>false,
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
